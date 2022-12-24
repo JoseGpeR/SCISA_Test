@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SCISADBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tbl_Test_Access">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fk_IdRole" Type="Int32" Nullable="false" />
+    <Property Name="Chr_Access" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Tbl_Test_Roles" Relationship="Self.FK__Tbl_Test___Fk_Id__571DF1D5" FromRole="Tbl_Test_Access" ToRole="Tbl_Test_Roles" />
+  </EntityType>
+  <EntityType Name="Tbl_Test_Dates">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Fk_IdPatient" Type="Int32" Nullable="false" />
+    <Property Name="Fk_IdDoctor" Type="Int32" Nullable="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Fk_IdUserMaker" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tbl_Test_Users" Relationship="Self.FK__Tbl_Test___Fk_Id__5441852A" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Users" />
+    <NavigationProperty Name="Tbl_Test_Patients" Relationship="Self.FK__Tbl_Test___Fk_Id__5535A963" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Patients" />
+    <NavigationProperty Name="Tbl_Test_Doctors" Relationship="Self.FK__Tbl_Test___Fk_Id__5629CD9C" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Doctors" />
+  </EntityType>
+  <EntityType Name="Tbl_Test_Doctors">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chr_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Chr_ProfessionalLicense" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5629CD9C" FromRole="Tbl_Test_Doctors" ToRole="Tbl_Test_Dates" />
+  </EntityType>
+  <EntityType Name="Tbl_Test_Patients">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chr_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Chr_DX" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5535A963" FromRole="Tbl_Test_Patients" ToRole="Tbl_Test_Dates" />
+  </EntityType>
+  <EntityType Name="Tbl_Test_Roles">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Chr_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Tbl_Test_Access" Relationship="Self.FK__Tbl_Test___Fk_Id__571DF1D5" FromRole="Tbl_Test_Roles" ToRole="Tbl_Test_Access" />
+    <NavigationProperty Name="Tbl_Test_Users" Relationship="Self.FK__Tbl_Test___Fk_Id__534D60F1" FromRole="Tbl_Test_Roles" ToRole="Tbl_Test_Users" />
+  </EntityType>
+  <EntityType Name="Tbl_Test_Users">
+    <Key>
+      <PropertyRef Name="Int_Id" />
+    </Key>
+    <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chr_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chr_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+    <Property Name="Fk_IdRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5441852A" FromRole="Tbl_Test_Users" ToRole="Tbl_Test_Dates" />
+    <NavigationProperty Name="Tbl_Test_Roles" Relationship="Self.FK__Tbl_Test___Fk_Id__534D60F1" FromRole="Tbl_Test_Users" ToRole="Tbl_Test_Roles" />
+  </EntityType>
+  <Association Name="FK__Tbl_Test___Fk_Id__571DF1D5">
+    <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+    <End Role="Tbl_Test_Access" Type="Self.Tbl_Test_Access" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Test_Roles">
+        <PropertyRef Name="Int_Id" />
+      </Principal>
+      <Dependent Role="Tbl_Test_Access">
+        <PropertyRef Name="Fk_IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tbl_Test___Fk_Id__5441852A">
+    <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="1" />
+    <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Test_Users">
+        <PropertyRef Name="Int_Id" />
+      </Principal>
+      <Dependent Role="Tbl_Test_Dates">
+        <PropertyRef Name="Fk_IdUserMaker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tbl_Test___Fk_Id__5535A963">
+    <End Role="Tbl_Test_Patients" Type="Self.Tbl_Test_Patients" Multiplicity="1" />
+    <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Test_Patients">
+        <PropertyRef Name="Int_Id" />
+      </Principal>
+      <Dependent Role="Tbl_Test_Dates">
+        <PropertyRef Name="Fk_IdPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tbl_Test___Fk_Id__5629CD9C">
+    <End Role="Tbl_Test_Doctors" Type="Self.Tbl_Test_Doctors" Multiplicity="1" />
+    <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Test_Doctors">
+        <PropertyRef Name="Int_Id" />
+      </Principal>
+      <Dependent Role="Tbl_Test_Dates">
+        <PropertyRef Name="Fk_IdDoctor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tbl_Test___Fk_Id__534D60F1">
+    <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+    <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Test_Roles">
+        <PropertyRef Name="Int_Id" />
+      </Principal>
+      <Dependent Role="Tbl_Test_Users">
+        <PropertyRef Name="Fk_IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SCISADBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tbl_Test_Access" EntityType="Self.Tbl_Test_Access" />
+    <EntitySet Name="Tbl_Test_Dates" EntityType="Self.Tbl_Test_Dates" />
+    <EntitySet Name="Tbl_Test_Doctors" EntityType="Self.Tbl_Test_Doctors" />
+    <EntitySet Name="Tbl_Test_Patients" EntityType="Self.Tbl_Test_Patients" />
+    <EntitySet Name="Tbl_Test_Roles" EntityType="Self.Tbl_Test_Roles" />
+    <EntitySet Name="Tbl_Test_Users" EntityType="Self.Tbl_Test_Users" />
+    <AssociationSet Name="FK__Tbl_Test___Fk_Id__571DF1D5" Association="Self.FK__Tbl_Test___Fk_Id__571DF1D5">
+      <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+      <End Role="Tbl_Test_Access" EntitySet="Tbl_Test_Access" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tbl_Test___Fk_Id__5441852A" Association="Self.FK__Tbl_Test___Fk_Id__5441852A">
+      <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+      <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tbl_Test___Fk_Id__5535A963" Association="Self.FK__Tbl_Test___Fk_Id__5535A963">
+      <End Role="Tbl_Test_Patients" EntitySet="Tbl_Test_Patients" />
+      <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tbl_Test___Fk_Id__5629CD9C" Association="Self.FK__Tbl_Test___Fk_Id__5629CD9C">
+      <End Role="Tbl_Test_Doctors" EntitySet="Tbl_Test_Doctors" />
+      <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tbl_Test___Fk_Id__534D60F1" Association="Self.FK__Tbl_Test___Fk_Id__534D60F1">
+      <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+      <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

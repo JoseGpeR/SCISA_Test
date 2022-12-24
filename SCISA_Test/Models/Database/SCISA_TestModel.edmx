@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SCISADBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Test_Access">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_IdRole" Type="int" Nullable="false" />
+          <Property Name="Chr_Access" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Dates">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Date" Type="datetime" Nullable="false" />
+          <Property Name="Fk_IdPatient" Type="int" Nullable="false" />
+          <Property Name="Fk_IdDoctor" Type="int" Nullable="false" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+          <Property Name="Fk_IdUserMaker" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Doctors">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chr_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chr_LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Chr_ProfessionalLicense" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+          <Property Name="Chr_Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Patients">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chr_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chr_LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Chr_DX" Type="varchar(max)" Nullable="false" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+          <Property Name="Chr_Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Roles">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chr_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Users">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chr_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chr_UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chr_Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Chr_Email" Type="varchar" MaxLength="100" />
+          <Property Name="Bit_Active" Type="bit" Nullable="false" />
+          <Property Name="Fk_IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Tbl_Test___Fk_Id__534D60F1">
+          <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+          <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Roles">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Users">
+              <PropertyRef Name="Fk_IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5441852A">
+          <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Users">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdUserMaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5535A963">
+          <End Role="Tbl_Test_Patients" Type="Self.Tbl_Test_Patients" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Patients">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5629CD9C">
+          <End Role="Tbl_Test_Doctors" Type="Self.Tbl_Test_Doctors" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Doctors">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__571DF1D5">
+          <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+          <End Role="Tbl_Test_Access" Type="Self.Tbl_Test_Access" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Roles">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Access">
+              <PropertyRef Name="Fk_IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SCISADBModelStoreContainer">
+          <EntitySet Name="Tbl_Test_Access" EntityType="Self.Tbl_Test_Access" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Test_Dates" EntityType="Self.Tbl_Test_Dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Test_Doctors" EntityType="Self.Tbl_Test_Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Test_Patients" EntityType="Self.Tbl_Test_Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Test_Roles" EntityType="Self.Tbl_Test_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Test_Users" EntityType="Self.Tbl_Test_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__534D60F1" Association="Self.FK__Tbl_Test___Fk_Id__534D60F1">
+            <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+            <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5441852A" Association="Self.FK__Tbl_Test___Fk_Id__5441852A">
+            <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5535A963" Association="Self.FK__Tbl_Test___Fk_Id__5535A963">
+            <End Role="Tbl_Test_Patients" EntitySet="Tbl_Test_Patients" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5629CD9C" Association="Self.FK__Tbl_Test___Fk_Id__5629CD9C">
+            <End Role="Tbl_Test_Doctors" EntitySet="Tbl_Test_Doctors" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__571DF1D5" Association="Self.FK__Tbl_Test___Fk_Id__571DF1D5">
+            <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+            <End Role="Tbl_Test_Access" EntitySet="Tbl_Test_Access" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SCISADBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Test_Access">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_IdRole" Type="Int32" Nullable="false" />
+          <Property Name="Chr_Access" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Test_Roles" Relationship="Self.FK__Tbl_Test___Fk_Id__571DF1D5" FromRole="Tbl_Test_Access" ToRole="Tbl_Test_Roles" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Dates">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fk_IdPatient" Type="Int32" Nullable="false" />
+          <Property Name="Fk_IdDoctor" Type="Int32" Nullable="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_IdUserMaker" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Test_Users" Relationship="Self.FK__Tbl_Test___Fk_Id__5441852A" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Users" />
+          <NavigationProperty Name="Tbl_Test_Patients" Relationship="Self.FK__Tbl_Test___Fk_Id__5535A963" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Patients" />
+          <NavigationProperty Name="Tbl_Test_Doctors" Relationship="Self.FK__Tbl_Test___Fk_Id__5629CD9C" FromRole="Tbl_Test_Dates" ToRole="Tbl_Test_Doctors" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Doctors">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Chr_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chr_ProfessionalLicense" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5629CD9C" FromRole="Tbl_Test_Doctors" ToRole="Tbl_Test_Dates" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Patients">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Chr_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chr_DX" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5535A963" FromRole="Tbl_Test_Patients" ToRole="Tbl_Test_Dates" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Roles">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chr_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Test_Access" Relationship="Self.FK__Tbl_Test___Fk_Id__571DF1D5" FromRole="Tbl_Test_Roles" ToRole="Tbl_Test_Access" />
+          <NavigationProperty Name="Tbl_Test_Users" Relationship="Self.FK__Tbl_Test___Fk_Id__534D60F1" FromRole="Tbl_Test_Roles" ToRole="Tbl_Test_Users" />
+        </EntityType>
+        <EntityType Name="Tbl_Test_Users">
+          <Key>
+            <PropertyRef Name="Int_Id" />
+          </Key>
+          <Property Name="Int_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Chr_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Chr_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Chr_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Bit_Active" Type="Boolean" Nullable="false" />
+          <Property Name="Fk_IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Test_Dates" Relationship="Self.FK__Tbl_Test___Fk_Id__5441852A" FromRole="Tbl_Test_Users" ToRole="Tbl_Test_Dates" />
+          <NavigationProperty Name="Tbl_Test_Roles" Relationship="Self.FK__Tbl_Test___Fk_Id__534D60F1" FromRole="Tbl_Test_Users" ToRole="Tbl_Test_Roles" />
+        </EntityType>
+        <Association Name="FK__Tbl_Test___Fk_Id__571DF1D5">
+          <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+          <End Role="Tbl_Test_Access" Type="Self.Tbl_Test_Access" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Roles">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Access">
+              <PropertyRef Name="Fk_IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5441852A">
+          <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Users">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdUserMaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5535A963">
+          <End Role="Tbl_Test_Patients" Type="Self.Tbl_Test_Patients" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Patients">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__5629CD9C">
+          <End Role="Tbl_Test_Doctors" Type="Self.Tbl_Test_Doctors" Multiplicity="1" />
+          <End Role="Tbl_Test_Dates" Type="Self.Tbl_Test_Dates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Doctors">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Dates">
+              <PropertyRef Name="Fk_IdDoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Test___Fk_Id__534D60F1">
+          <End Role="Tbl_Test_Roles" Type="Self.Tbl_Test_Roles" Multiplicity="1" />
+          <End Role="Tbl_Test_Users" Type="Self.Tbl_Test_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Test_Roles">
+              <PropertyRef Name="Int_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Test_Users">
+              <PropertyRef Name="Fk_IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SCISADBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Test_Access" EntityType="Self.Tbl_Test_Access" />
+          <EntitySet Name="Tbl_Test_Dates" EntityType="Self.Tbl_Test_Dates" />
+          <EntitySet Name="Tbl_Test_Doctors" EntityType="Self.Tbl_Test_Doctors" />
+          <EntitySet Name="Tbl_Test_Patients" EntityType="Self.Tbl_Test_Patients" />
+          <EntitySet Name="Tbl_Test_Roles" EntityType="Self.Tbl_Test_Roles" />
+          <EntitySet Name="Tbl_Test_Users" EntityType="Self.Tbl_Test_Users" />
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__571DF1D5" Association="Self.FK__Tbl_Test___Fk_Id__571DF1D5">
+            <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+            <End Role="Tbl_Test_Access" EntitySet="Tbl_Test_Access" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5441852A" Association="Self.FK__Tbl_Test___Fk_Id__5441852A">
+            <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5535A963" Association="Self.FK__Tbl_Test___Fk_Id__5535A963">
+            <End Role="Tbl_Test_Patients" EntitySet="Tbl_Test_Patients" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__5629CD9C" Association="Self.FK__Tbl_Test___Fk_Id__5629CD9C">
+            <End Role="Tbl_Test_Doctors" EntitySet="Tbl_Test_Doctors" />
+            <End Role="Tbl_Test_Dates" EntitySet="Tbl_Test_Dates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Test___Fk_Id__534D60F1" Association="Self.FK__Tbl_Test___Fk_Id__534D60F1">
+            <End Role="Tbl_Test_Roles" EntitySet="Tbl_Test_Roles" />
+            <End Role="Tbl_Test_Users" EntitySet="Tbl_Test_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SCISADBModelStoreContainer" CdmEntityContainer="SCISADBEntities">
+          <EntitySetMapping Name="Tbl_Test_Access">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Access">
+              <MappingFragment StoreEntitySet="Tbl_Test_Access">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Fk_IdRole" ColumnName="Fk_IdRole" />
+                <ScalarProperty Name="Chr_Access" ColumnName="Chr_Access" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Test_Dates">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Dates">
+              <MappingFragment StoreEntitySet="Tbl_Test_Dates">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Date_Date" ColumnName="Date_Date" />
+                <ScalarProperty Name="Fk_IdPatient" ColumnName="Fk_IdPatient" />
+                <ScalarProperty Name="Fk_IdDoctor" ColumnName="Fk_IdDoctor" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+                <ScalarProperty Name="Fk_IdUserMaker" ColumnName="Fk_IdUserMaker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Test_Doctors">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Doctors">
+              <MappingFragment StoreEntitySet="Tbl_Test_Doctors">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+                <ScalarProperty Name="Chr_LastName" ColumnName="Chr_LastName" />
+                <ScalarProperty Name="Chr_ProfessionalLicense" ColumnName="Chr_ProfessionalLicense" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+                <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Test_Patients">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Patients">
+              <MappingFragment StoreEntitySet="Tbl_Test_Patients">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+                <ScalarProperty Name="Chr_LastName" ColumnName="Chr_LastName" />
+                <ScalarProperty Name="Chr_DX" ColumnName="Chr_DX" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+                <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Test_Roles">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Roles">
+              <MappingFragment StoreEntitySet="Tbl_Test_Roles">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Test_Users">
+            <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Users">
+              <MappingFragment StoreEntitySet="Tbl_Test_Users">
+                <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+                <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+                <ScalarProperty Name="Chr_UserName" ColumnName="Chr_UserName" />
+                <ScalarProperty Name="Chr_Password" ColumnName="Chr_Password" />
+                <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+                <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+                <ScalarProperty Name="Fk_IdRole" ColumnName="Fk_IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

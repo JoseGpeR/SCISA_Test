@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SCISADBModelStoreContainer" CdmEntityContainer="SCISADBEntities">
+    <EntitySetMapping Name="Tbl_Test_Access">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Access">
+        <MappingFragment StoreEntitySet="Tbl_Test_Access">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Fk_IdRole" ColumnName="Fk_IdRole" />
+          <ScalarProperty Name="Chr_Access" ColumnName="Chr_Access" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Test_Dates">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Dates">
+        <MappingFragment StoreEntitySet="Tbl_Test_Dates">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Date_Date" ColumnName="Date_Date" />
+          <ScalarProperty Name="Fk_IdPatient" ColumnName="Fk_IdPatient" />
+          <ScalarProperty Name="Fk_IdDoctor" ColumnName="Fk_IdDoctor" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+          <ScalarProperty Name="Fk_IdUserMaker" ColumnName="Fk_IdUserMaker" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Test_Doctors">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Doctors">
+        <MappingFragment StoreEntitySet="Tbl_Test_Doctors">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+          <ScalarProperty Name="Chr_LastName" ColumnName="Chr_LastName" />
+          <ScalarProperty Name="Chr_ProfessionalLicense" ColumnName="Chr_ProfessionalLicense" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+          <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Test_Patients">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Patients">
+        <MappingFragment StoreEntitySet="Tbl_Test_Patients">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+          <ScalarProperty Name="Chr_LastName" ColumnName="Chr_LastName" />
+          <ScalarProperty Name="Chr_DX" ColumnName="Chr_DX" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+          <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Test_Roles">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Roles">
+        <MappingFragment StoreEntitySet="Tbl_Test_Roles">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tbl_Test_Users">
+      <EntityTypeMapping TypeName="SCISADBModel.Tbl_Test_Users">
+        <MappingFragment StoreEntitySet="Tbl_Test_Users">
+          <ScalarProperty Name="Int_Id" ColumnName="Int_Id" />
+          <ScalarProperty Name="Chr_Name" ColumnName="Chr_Name" />
+          <ScalarProperty Name="Chr_UserName" ColumnName="Chr_UserName" />
+          <ScalarProperty Name="Chr_Password" ColumnName="Chr_Password" />
+          <ScalarProperty Name="Chr_Email" ColumnName="Chr_Email" />
+          <ScalarProperty Name="Bit_Active" ColumnName="Bit_Active" />
+          <ScalarProperty Name="Fk_IdRole" ColumnName="Fk_IdRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

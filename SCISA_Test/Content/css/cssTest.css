@@ -1,0 +1,14 @@
+﻿.grid-container, agGridDates {
+    width: 100%;
+}
+.ag-header-cell-menu-button {
+    opacity: 0.9 !important;
+}
+.width100 {
+    width: 100% !important;
+}
+.icon {
+    cursor: pointer;
+    margin: auto;
+    margin-right: 15px;
+}

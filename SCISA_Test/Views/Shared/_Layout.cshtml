@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Scripts/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Scripts/plugins/adminlte/adminlte.min.css">
+    <!-- Swal Alert -->
+    <link href="~/Scripts/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    <!-- My style -->
+    <link rel="stylesheet" href="~/Scripts/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Content/css/cssTest.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar sticky-top navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item active d-none d-sm-inline-block">
+                    <a href="@Url.Action("Lobby", "Account")" class="nav-link">Inicio</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("LogOut", "Account")" role="button">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Content. Contains page content -->
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- jQuery -->
+    <script src="~/Scripts/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Scripts/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/plugins/adminlte/adminlte.min.js"></script>
+    <script src="~/Scripts/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Ag Grid -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <!-- Swall Alerts -->
+    <script type="text/javascript" src="~/Scripts/plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        let temp_url = "@System.Configuration.ConfigurationManager.AppSettings["urlWebApi"]";
+        if (temp_url[temp_url.length - 1] != "/") {
+            temp_url += "/";
+        }
+        const urlWebApi = temp_url;
+        const url_controllers = {
+            _getAllDates: "@Url.Action("getAllDates", "Dates")",
+            _saveDate: "@Url.Action("saveDate", "Dates")",
+            _deleteDate: "@Url.Action("deleteDate", "Dates")",
+            _getPxDx: "@Url.Action("getPxDx", "Doctors")",
+            _saveDoctor: "@Url.Action("saveDoctor", "Doctors")",
+            _getUsers: "@Url.Action("getUsers", "Users")",
+            _saveUser: "@Url.Action("saveUser", "Users")"
+        };
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

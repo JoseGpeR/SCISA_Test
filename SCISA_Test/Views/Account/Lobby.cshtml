@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Lobby";
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-right">
+                <button class="btn btn-success" id="btnAddNewDate" onclick="f_newDateButton(true)" data-toggle="modal" data-target="#modalAddDate"><i class="fas fa-plus-circle"></i> Agregar nueva cita</button>
+                <button class="btn btn-primary" onclick="f_newDocButton()" data-toggle="modal" data-target="#modalAddDoc"><i class="fas fa-plus-circle"></i> Agregar doctor</button>
+                <button class="btn btn-dark" onclick="f_newDocButton()" data-toggle="modal" data-target="#modalAddUser"><i class="fas fa-plus-circle"></i> Agregar usuario</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Citas</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="grid-container">
+                        <div class="ag-theme-alpine grid" id="agGridDates">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- Modal -->
+<div class="modal fade" id="modalAddDate" tabindex="-1" role="dialog" aria-labelledby="labelModalAddDate" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="labelModalAddDate">Agendar nueva cita</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inpDate">Fecha para cita:</label>
+                            <input type="date" class="form-control" id="inpDate">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpPxName">Nombres:</label>
+                            <input type="text" class="form-control" autocomplete="on" id="inpPxName" placeholder="Nombres del paciente">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpPxLastName">Apellidos:</label>
+                            <input type="text" class="form-control" id="inpPxLastName" autocomplete="on" placeholder="Apellidos del paciente">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="txtDX">Diagnóstico:</label>
+                            <textarea class="form-control" rows="4" id="txtDX" autocomplete="on" placeholder="Diagnóstico del paciente"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpEmailPx">Email:</label>
+                            <input type="email" class="form-control" id="inpEmailPx" autocomplete="on" placeholder="Email del paciente">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="sltDoctor">Doctor:</label>
+                            <select class="select2 width100" id="sltDoctor">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCloseAddDateModal" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" id="btnSaveDate" onclick="fSaveDate()" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalAddDoc" tabindex="-1" role="dialog" aria-labelledby="labelModalAddDoc" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="labelModalAddDoc">Agregar doctor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpDxName">Nombres:</label>
+                            <input type="text" class="form-control" autocomplete="on" id="inpDxName" placeholder="Nombres del doctor">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpDxLastName">Apellidos:</label>
+                            <input type="text" class="form-control" id="inpDxLastName" autocomplete="on" placeholder="Apellidos del doctor">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inpCPDx">Cédula profesional:</label>
+                            <input type="text" class="form-control" id="inpCPDx" autocomplete="on" placeholder="Cédula profesional del doctor">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="inpEmailDx">Email:</label>
+                                <input type="email" class="form-control" id="inpEmailDx" autocomplete="on" placeholder="Email del doctor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCloseAddDocModal" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" id="btnSaveDoc" onclick="fSaveDoctor()" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="labelModalAddUser" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="labelModalAddUser">Agregar usuario</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpNameUser">Nombre:</label>
+                            <input type="text" class="form-control" autocomplete="on" id="inpNameUser" placeholder="Nombres del usuario">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label for="inpUserName">Nombre de usuario:</label>
+                            <input type="text" class="form-control" id="inpUserName" autocomplete="on" placeholder="Username del usuario">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inpEmailUser">Email:</label>
+                            <input type="email" class="form-control" id="inpEmailUser" autocomplete="on" placeholder="Email del usuario">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inpPassword1">Contraseña:</label>
+                            <input type="password" class="form-control" id="inpPassword1" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inpPassword2">Repita la contraseña:</label>
+                            <input type="password" class="form-control" id="inpPassword2" autocomplete="on">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCloseAddDocModal" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" id="btnSaveUser" onclick="fSaveUser()" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content -->
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/Test/test.js"></script>
+}
